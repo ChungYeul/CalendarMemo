@@ -25,6 +25,8 @@
     int _MonthLastDay; // 해당 달의 마지막 날.
     unsigned int _unitFlags; // 각각 연, 월, 일, 시, 분, 초 구성요소를 사용한다고 지정하는 플래그 연산이다.
     int _aDay;
+    
+    BOOL isFir;
 }
 
 - (IBAction)doPrevMonth:(id)sender {
@@ -51,11 +53,11 @@
     
     NSDate *dateFuture = [_calendar dateFromComponents:_weekdayComponent];
     _weekdayComponent = [_calendar components:_unitFlags fromDate:dateFuture];
-    _aDay = 1;
     _MonthLastDay = [self GetLastDayOfMonth:_weekdayComponent];
+    _aDay = 1;
+    _currentWeekDay = [_weekdayComponent weekday];
     
     [self.collectionView reloadData];
-    
     [self refreshCalendarLabel];
 }
 
@@ -83,7 +85,7 @@
     self.yymmddLabel.text = [NSString stringWithFormat:@"%ld년 %ld월",
                              (long)[_weekdayComponent year],
                              (long)[_weekdayComponent month]];
-    NSLog(@"%d", _MonthLastDay);
+//    NSLog(@"%d", _MonthLastDay);
 }
 - (void)viewDidLoad
 {
@@ -117,12 +119,14 @@
 	cell.layer.borderColor = (cell.selected) ? [UIColor yellowColor].CGColor : nil;
 	cell.layer.borderWidth = (cell.selected) ? 5.0f : 0.0f;
     
+    NSLog(@"%d, %d", _MonthLastDay, _currentWeekDay);
     // 표시할 이미지 설정
     if (_currentWeekDay <= indexPath.row+1 &&
-        _MonthLastDay >= indexPath.row+1) {
+        _MonthLastDay +_currentWeekDay > indexPath.row+1) {
         UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
         lbl.textAlignment = NSTextAlignmentCenter;
         lbl.text = [NSString stringWithFormat:@"%d", _aDay];
+        NSLog(@"%d", _aDay);
         [cell addSubview:lbl];
         _aDay++;
     }
