@@ -21,6 +21,7 @@
 		005F5DF9188F54720066B4AB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 005F5DDB188F54710066B4AB /* UIKit.framework */; };
 		005F5E01188F54720066B4AB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 005F5DFF188F54720066B4AB /* InfoPlist.strings */; };
 		005F5E03188F54720066B4AB /* CalendarMemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 005F5E02188F54720066B4AB /* CalendarMemoTests.m */; };
+		005F5E0E188F85BD0066B4AB /* CalendarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 005F5E0D188F85BD0066B4AB /* CalendarCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,8 @@
 		005F5DFE188F54720066B4AB /* CalendarMemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CalendarMemoTests-Info.plist"; sourceTree = "<group>"; };
 		005F5E00188F54720066B4AB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		005F5E02188F54720066B4AB /* CalendarMemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CalendarMemoTests.m; sourceTree = "<group>"; };
+		005F5E0C188F85BD0066B4AB /* CalendarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarCell.h; sourceTree = "<group>"; };
+		005F5E0D188F85BD0066B4AB /* CalendarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +122,8 @@
 				005F5DED188F54710066B4AB /* ViewController.m */,
 				005F5DEF188F54710066B4AB /* Images.xcassets */,
 				005F5DDE188F54710066B4AB /* Supporting Files */,
+				005F5E0C188F85BD0066B4AB /* CalendarCell.h */,
+				005F5E0D188F85BD0066B4AB /* CalendarCell.m */,
 			);
 			path = CalendarMemo;
 			sourceTree = "<group>";
@@ -252,6 +257,7 @@
 				005F5DEE188F54710066B4AB /* ViewController.m in Sources */,
 				005F5DE8188F54710066B4AB /* AppDelegate.m in Sources */,
 				005F5DE4188F54710066B4AB /* main.m in Sources */,
+				005F5E0E188F85BD0066B4AB /* CalendarCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
