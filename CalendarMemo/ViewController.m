@@ -10,7 +10,6 @@
 #import "CalendarCell.h"
 
 #define CALENDAR_CELL @"CALENDAR_CELL"
-#define SECONDS_PER_DAY 24 * 60 * 60
 
 @interface ViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -25,19 +24,26 @@
     int _MonthLastDay; // 해당 달의 마지막 날.
     unsigned int _unitFlags; // 각각 연, 월, 일, 시, 분, 초 구성요소를 사용한다고 지정하는 플래그 연산이다.
     int _aDay;
-    
-    BOOL isFir;
 }
 
 - (IBAction)doPrevMonth:(id)sender {
     if (1 == [_weekdayComponent month]) {
         [_weekdayComponent setMonth:12];
         [_weekdayComponent setYear:([_weekdayComponent year] - 1)];
+        [_weekdayComponent setDay:1];
     }
     else {
         [_weekdayComponent setMonth:([_weekdayComponent month] - 1)];
+        [_weekdayComponent setDay:1];
     }
+    NSDate *dateFuture = [_calendar dateFromComponents:_weekdayComponent];
+    _weekdayComponent = [_calendar components:_unitFlags fromDate:dateFuture];
     _MonthLastDay = [self GetLastDayOfMonth:_weekdayComponent];
+    _aDay = 1;
+    _currentWeekDay = [_weekdayComponent weekday];
+    
+    [self.collectionView reloadItemsAtIndexPaths:[self.collectionView indexPathsForVisibleItems]];
+//    [self.collectionView reloadData];
     [self refreshCalendarLabel];
 }
 - (IBAction)doNextMonth:(id)sender {
@@ -57,7 +63,8 @@
     _aDay = 1;
     _currentWeekDay = [_weekdayComponent weekday];
     
-    [self.collectionView reloadData];
+    [self.collectionView reloadItemsAtIndexPaths:[self.collectionView indexPathsForVisibleItems]];
+//    [self.collectionView reloadData];
     [self refreshCalendarLabel];
 }
 
@@ -119,14 +126,14 @@
 	cell.layer.borderColor = (cell.selected) ? [UIColor yellowColor].CGColor : nil;
 	cell.layer.borderWidth = (cell.selected) ? 5.0f : 0.0f;
     
-    NSLog(@"%d, %d", _MonthLastDay, _currentWeekDay);
+//    NSLog(@"%d, %d", _MonthLastDay, _currentWeekDay);
     // 표시할 이미지 설정
     if (_currentWeekDay <= indexPath.row+1 &&
         _MonthLastDay +_currentWeekDay > indexPath.row+1) {
         UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
         lbl.textAlignment = NSTextAlignmentCenter;
         lbl.text = [NSString stringWithFormat:@"%d", _aDay];
-        NSLog(@"%d", _aDay);
+        NSLog(@"%d", indexPath.row);
         [cell addSubview:lbl];
         _aDay++;
     }
@@ -144,7 +151,6 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"%d", indexPath.row);
     UICollectionViewCell* cell = [collectionView cellForItemAtIndexPath:indexPath];
     
     cell.layer.borderColor = [UIColor yellowColor].CGColor;
