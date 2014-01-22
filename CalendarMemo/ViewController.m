@@ -19,8 +19,12 @@
 @end
 
 @implementation ViewController {
+    NSCalendar *_calendar;
     NSDateComponents *_weekdayComponent;
+    NSInteger _currentWeekDay; // 해당 달의 시작 요일 (1=일요일, 2=월요일,...)
     int _MonthLastDay; // 해당 달의 마지막 날.
+    unsigned int _unitFlags; // 각각 연, 월, 일, 시, 분, 초 구성요소를 사용한다고 지정하는 플래그 연산이다.
+    int _aDay;
 }
 
 - (IBAction)doPrevMonth:(id)sender {
@@ -38,11 +42,20 @@
     if (12 == [_weekdayComponent month]) {
         [_weekdayComponent setMonth:1];
         [_weekdayComponent setYear:([_weekdayComponent year] + 1)];
+        [_weekdayComponent setDay:1];
     }
     else {
         [_weekdayComponent setMonth:([_weekdayComponent month] + 1)];
+        [_weekdayComponent setDay:1];
     }
+    
+    NSDate *dateFuture = [_calendar dateFromComponents:_weekdayComponent];
+    _weekdayComponent = [_calendar components:_unitFlags fromDate:dateFuture];
+    _aDay = 1;
     _MonthLastDay = [self GetLastDayOfMonth:_weekdayComponent];
+    
+    [self.collectionView reloadData];
+    
     [self refreshCalendarLabel];
 }
 
@@ -78,87 +91,17 @@
 //    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     
     NSDate *today = [NSDate date];
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    unsigned int unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit; // 각각 연, 월, 일, 시, 분, 초 구성요소를 사용한다고 지정하는 플래그 연산이다.
-    _weekdayComponent = [calendar components:unitFlags fromDate:today];
+    _calendar = [NSCalendar currentCalendar];
+    _unitFlags = NSWeekdayCalendarUnit | NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+    _weekdayComponent = [_calendar components:_unitFlags fromDate:today];
     _MonthLastDay = [self GetLastDayOfMonth:_weekdayComponent];
-    [self refreshCalendarLabel];
+    _aDay = 1;
     
-//    NSDate *tomorrow = [[NSDate alloc] initWithTimeIntervalSinceNow:_secondsPerDay];
-//    int i = [self GetLastDayOfMonth:_today];
-//    int j = [self GetLastDayOfMonth:tomorrow];
-//    NSLog(@"%d, %d", i, j);
-
     //
-//    NSLog(@"calendar : %@", [weekdayComponent calendar]);
-//    NSLog(@"timezone : %@", [weekdayComponent timeZone]);
-//    NSLog(@"era : %ld", (long)[weekdayComponent era]);
-//    NSLog(@"year : %ld", (long)[weekdayComponent year]);
-//    NSLog(@"month : %ld", (long)[weekdayComponent month]);
-//    NSLog(@"day : %ld", (long)[weekdayComponent day]);
-//    NSLog(@"hour : %ld", (long)[weekdayComponent hour]);
-//    NSLog(@"minute : %ld", (long)[weekdayComponent minute]);
-//    NSLog(@"second : %ld", (long)[weekdayComponent second]);
-//    NSLog(@"week : %ld", (long)[weekdayComponent week]);
-//    NSLog(@"weekday : %ld", (long)[weekdayComponent weekday]);
-//    NSLog(@"weekdayOrdinal : %ld", (long)[weekdayComponent weekdayOrdinal]);
-//    NSLog(@"quarter : %ld", (long)[weekdayComponent quarter]);
-//    NSLog(@"weekOfMonth : %ld", (long)[weekdayComponent weekOfMonth]);
-//    NSLog(@"weekOfYear : %ld", (long)[weekdayComponent weekOfYear]);
-//    NSLog(@"yearForWeekOfYear : %ld", (long)[weekdayComponent yearForWeekOfYear]);
+    _currentWeekDay = [_weekdayComponent weekday];
     
-//    NSLog(@"%ld, %ld", day, (long)weekday);
-    
-    
-//    NSDate *today = [NSDate date];
-//    NSCalendar *calendar = [NSCalendar currentCalendar];
-//    NSDateComponents *weekdayComponents = [calendar components:NSWeekdayCalendarUnit
-//                                                      fromDate:today];
-//    // 오늘 날짜의 요일을 뽑아 이를 사용해 일요일의 날짜를 구하기
-//    NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
-//    offsetComponents.day = 0 - (weekdayComponents - 1);
-//    NSDate *beginningOfThisWeek = [calendar
-//                                   dateByAddingComponents:offsetComponents
-//                                   toDate:today
-//                                   options:0];
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-//    NSCalendar *calendar1 = [NSCalendar currentCalendar];
-//    NSLog(@"currentCalendar : %@", calendar1);
-//    
-//    // calendarIdentifier
-//    NSString *identifier = [calendar1 calendarIdentifier];
-//    NSLog(@"identifier method : %@.", identifier);
-//    identifier = nil;
-//    
-//    // components:fromDate:
-//    unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit;
-//    NSDate *date1 = [NSDate date];
-//    NSDateComponents *dateComponent1 = [calendar1 components:unitFlags fromDate:date1];
-//    NSLog(@"NSDateComponents : %lu-%lu-%lu", [dateComponent1 year], [dateComponent1 month], [dateComponent1 day]);
-//    date1 = nil;
-//    dateComponent1 = nil;
-//    
-//    // datefromComponents:
-//    NSDateComponents *comps = [[NSDateComponents alloc] init];
-//    [comps setYear:1965];
-//    [comps setMonth:1];
-//    [comps setDay:6];
-//    [comps setHour:14];
-//    [comps setMinute:10];
-//    [comps setSecond:0];
-//    
-//    NSDate *date2 = [calendar1 dateFromComponents:comps];
-//    NSLog(@"dateFromComponents : %@.", date2);
+    [self refreshCalendarLabel];
+
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -166,10 +109,6 @@
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    CalendarCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CALENDAR_CELL forIndexPath:indexPath];
-    cell.cellLabel.text = @"1";
-    return cell;
-    /*
     // 재사용 큐에 셀을 가져온다
 	UICollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:CALENDAR_CELL forIndexPath:indexPath];
 	
@@ -178,12 +117,15 @@
 	cell.layer.borderColor = (cell.selected) ? [UIColor yellowColor].CGColor : nil;
 	cell.layer.borderWidth = (cell.selected) ? 5.0f : 0.0f;
     
-//    cell.labelDisplay.text
-    //	// 표시할 이미지 설정
-    //	UIImageView* imgView = (UIImageView*)[cell.contentView viewWithTag:100];
-    //	if (imgView) imgView.image = self.dataList[indexPath.section][indexPath.row];
-    //
-     */
+    // 표시할 이미지 설정
+    if (_currentWeekDay <= indexPath.row+1 &&
+        _MonthLastDay >= indexPath.row+1) {
+        UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
+        lbl.textAlignment = NSTextAlignmentCenter;
+        lbl.text = [NSString stringWithFormat:@"%d", _aDay];
+        [cell addSubview:lbl];
+        _aDay++;
+    }
 	return cell;
     
 }
