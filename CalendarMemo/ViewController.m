@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "CalendarCell.h"
+#import "MomoViewController.h"
 
 #define CALENDAR_CELL @"CALENDAR_CELL"
 
@@ -133,8 +134,12 @@
         UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
         lbl.textAlignment = NSTextAlignmentCenter;
         lbl.text = [NSString stringWithFormat:@"%d", _aDay];
-        NSLog(@"%d", indexPath.row);
+//        NSLog(@"%d", indexPath.row);
         [cell addSubview:lbl];
+        
+//        UILabel *lbl = (UILabel *)[cell viewWithTag:100];
+//        lbl.text = [NSString stringWithFormat:@"%d", _aDay];
+        
         _aDay++;
     }
 	return cell;
@@ -151,8 +156,15 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell* cell = [collectionView cellForItemAtIndexPath:indexPath];
     
+    UIStoryboard *story = self.storyboard;
+    MomoViewController *memoVC = [story instantiateViewControllerWithIdentifier:@"memoVC"];
+    NSString *string = [NSString stringWithFormat:@"%d-%d-%d", (int)[_weekdayComponent year], (int)[_weekdayComponent month], ((int)indexPath.row - (int)_currentWeekDay +2)];
+    memoVC.selectDay = string;
+    
+    [self presentViewController:memoVC animated:YES completion:nil];
+    
+    UICollectionViewCell* cell = [collectionView cellForItemAtIndexPath:indexPath];
     cell.layer.borderColor = [UIColor yellowColor].CGColor;
     cell.layer.borderWidth = 5.0f;
 }
@@ -160,7 +172,6 @@
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewCell* cell = [collectionView cellForItemAtIndexPath:indexPath];
-    
     cell.layer.borderColor = nil;
     cell.layer.borderWidth = 0.0f;
 }

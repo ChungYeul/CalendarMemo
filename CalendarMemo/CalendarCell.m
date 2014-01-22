@@ -17,7 +17,6 @@
         self.cellLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
         self.cellLabel.center = self.center;
         self.cellLabel.textAlignment = NSTextAlignmentCenter;
-//        self.cellLabel.textColor = [UIColor redColor];
         self.backgroundView = self.cellLabel;
     }
     return self;

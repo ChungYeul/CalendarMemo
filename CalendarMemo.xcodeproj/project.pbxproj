@@ -22,6 +22,14 @@
 		005F5E01188F54720066B4AB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 005F5DFF188F54720066B4AB /* InfoPlist.strings */; };
 		005F5E03188F54720066B4AB /* CalendarMemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 005F5E02188F54720066B4AB /* CalendarMemoTests.m */; };
 		005F5E0E188F85BD0066B4AB /* CalendarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 005F5E0D188F85BD0066B4AB /* CalendarCell.m */; };
+		005F5E11188F9CE80066B4AB /* MomoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 005F5E10188F9CE80066B4AB /* MomoViewController.m */; };
+		005F5E14188FA27B0066B4AB /* Memo.m in Sources */ = {isa = PBXBuildFile; fileRef = 005F5E13188FA27B0066B4AB /* Memo.m */; };
+		005F5E16188FA2FD0066B4AB /* db.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 005F5E15188FA2FD0066B4AB /* db.sqlite */; };
+		005F5E19188FA3200066B4AB /* MemoCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 005F5E18188FA3200066B4AB /* MemoCenter.m */; };
+		005F5E1B188FA35C0066B4AB /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 005F5E1A188FA35C0066B4AB /* libsqlite3.dylib */; };
+		005F5E1F188FABA70066B4AB /* rightBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 005F5E1D188FABA70066B4AB /* rightBtn.png */; };
+		005F5E20188FABA70066B4AB /* leftBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 005F5E1E188FABA70066B4AB /* leftBtn.png */; };
+		005F5E22188FAE6A0066B4AB /* memoBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 005F5E21188FAE6A0066B4AB /* memoBackground.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +64,17 @@
 		005F5E02188F54720066B4AB /* CalendarMemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CalendarMemoTests.m; sourceTree = "<group>"; };
 		005F5E0C188F85BD0066B4AB /* CalendarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarCell.h; sourceTree = "<group>"; };
 		005F5E0D188F85BD0066B4AB /* CalendarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarCell.m; sourceTree = "<group>"; };
+		005F5E0F188F9CE80066B4AB /* MomoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MomoViewController.h; sourceTree = "<group>"; };
+		005F5E10188F9CE80066B4AB /* MomoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MomoViewController.m; sourceTree = "<group>"; };
+		005F5E12188FA27B0066B4AB /* Memo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Memo.h; sourceTree = "<group>"; };
+		005F5E13188FA27B0066B4AB /* Memo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Memo.m; sourceTree = "<group>"; };
+		005F5E15188FA2FD0066B4AB /* db.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = db.sqlite; sourceTree = "<group>"; };
+		005F5E17188FA3200066B4AB /* MemoCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoCenter.h; sourceTree = "<group>"; };
+		005F5E18188FA3200066B4AB /* MemoCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemoCenter.m; sourceTree = "<group>"; };
+		005F5E1A188FA35C0066B4AB /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		005F5E1D188FABA70066B4AB /* rightBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rightBtn.png; sourceTree = "<group>"; };
+		005F5E1E188FABA70066B4AB /* leftBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leftBtn.png; sourceTree = "<group>"; };
+		005F5E21188FAE6A0066B4AB /* memoBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = memoBackground.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				005F5E1B188FA35C0066B4AB /* libsqlite3.dylib in Frameworks */,
 				005F5DDA188F54710066B4AB /* CoreGraphics.framework in Frameworks */,
 				005F5DDC188F54710066B4AB /* UIKit.framework in Frameworks */,
 				005F5DD8188F54710066B4AB /* Foundation.framework in Frameworks */,
@@ -104,6 +124,7 @@
 		005F5DD6188F54710066B4AB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				005F5E1A188FA35C0066B4AB /* libsqlite3.dylib */,
 				005F5DD7188F54710066B4AB /* Foundation.framework */,
 				005F5DD9188F54710066B4AB /* CoreGraphics.framework */,
 				005F5DDB188F54710066B4AB /* UIKit.framework */,
@@ -115,6 +136,8 @@
 		005F5DDD188F54710066B4AB /* CalendarMemo */ = {
 			isa = PBXGroup;
 			children = (
+				005F5E1C188FABA70066B4AB /* images */,
+				005F5E15188FA2FD0066B4AB /* db.sqlite */,
 				005F5DE6188F54710066B4AB /* AppDelegate.h */,
 				005F5DE7188F54710066B4AB /* AppDelegate.m */,
 				005F5DE9188F54710066B4AB /* Main.storyboard */,
@@ -124,6 +147,12 @@
 				005F5DDE188F54710066B4AB /* Supporting Files */,
 				005F5E0C188F85BD0066B4AB /* CalendarCell.h */,
 				005F5E0D188F85BD0066B4AB /* CalendarCell.m */,
+				005F5E0F188F9CE80066B4AB /* MomoViewController.h */,
+				005F5E10188F9CE80066B4AB /* MomoViewController.m */,
+				005F5E12188FA27B0066B4AB /* Memo.h */,
+				005F5E13188FA27B0066B4AB /* Memo.m */,
+				005F5E17188FA3200066B4AB /* MemoCenter.h */,
+				005F5E18188FA3200066B4AB /* MemoCenter.m */,
 			);
 			path = CalendarMemo;
 			sourceTree = "<group>";
@@ -155,6 +184,16 @@
 				005F5DFF188F54720066B4AB /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		005F5E1C188FABA70066B4AB /* images */ = {
+			isa = PBXGroup;
+			children = (
+				005F5E21188FAE6A0066B4AB /* memoBackground.png */,
+				005F5E1D188FABA70066B4AB /* rightBtn.png */,
+				005F5E1E188FABA70066B4AB /* leftBtn.png */,
+			);
+			path = images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -235,7 +274,11 @@
 			files = (
 				005F5DF0188F54710066B4AB /* Images.xcassets in Resources */,
 				005F5DE2188F54710066B4AB /* InfoPlist.strings in Resources */,
+				005F5E1F188FABA70066B4AB /* rightBtn.png in Resources */,
 				005F5DEB188F54710066B4AB /* Main.storyboard in Resources */,
+				005F5E16188FA2FD0066B4AB /* db.sqlite in Resources */,
+				005F5E20188FABA70066B4AB /* leftBtn.png in Resources */,
+				005F5E22188FAE6A0066B4AB /* memoBackground.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,9 +297,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				005F5E11188F9CE80066B4AB /* MomoViewController.m in Sources */,
+				005F5E14188FA27B0066B4AB /* Memo.m in Sources */,
 				005F5DEE188F54710066B4AB /* ViewController.m in Sources */,
 				005F5DE8188F54710066B4AB /* AppDelegate.m in Sources */,
 				005F5DE4188F54710066B4AB /* main.m in Sources */,
+				005F5E19188FA3200066B4AB /* MemoCenter.m in Sources */,
 				005F5E0E188F85BD0066B4AB /* CalendarCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
